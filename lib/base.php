@@ -1268,7 +1268,7 @@ class F3 extends Base {
 		$time=time();
 		$req=preg_replace('/^'.preg_quote(self::$vars['BASE'],'/').
 			'\b(.+)/'.(self::$vars['CASELESS']?'i':''),'\1',
-			rawurldecode($_SERVER['REQUEST_URI']));
+			$_SERVER['REQUEST_URI']);
 		foreach (self::$vars['ROUTES'] as $uri=>$route) {
 			if (!preg_match('/^'.
 				preg_replace(
@@ -1307,7 +1307,7 @@ class F3 extends Base {
 						// Remove non-zero indexed elements
 						if (is_numeric($key) && $key)
 							unset($args[$key]);
-				self::$vars['PARAMS']=$args;
+				self::$vars['PARAMS']=array_map('rawurldecode',$args);
 				// Default: Do not cache
 				self::expire(0);
 				if ($_SERVER['REQUEST_METHOD']=='GET' && $ttl) {
