@@ -735,7 +735,7 @@ class F3 extends Base {
 			@param $resolve bool
 			@public
 	**/
-	static function set($key,$val,$persist=FALSE,$resolve=TRUE) {
+	static function set($key,$val,$persist=FALSE,$resolve=FALSE) {
 		if (preg_match('/{{.+}}/',$key))
 			// Variable variable
 			$key=self::resolve($key);
